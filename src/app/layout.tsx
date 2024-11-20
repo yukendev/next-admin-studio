@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-import "./tailwind.css";
+import { Providers } from "./providers";
 
 export const metadata: Metadata = {
   title: "Next Admin Studio",
@@ -14,8 +14,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ja">
-      <body>{children}</body>
+    <html lang="ja" data-mantine-color-scheme="light">
+      <body>
+        <Providers>{children}</Providers>
+      </body>
     </html>
   );
 }
