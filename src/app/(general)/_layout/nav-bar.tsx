@@ -1,18 +1,18 @@
-import { ModelName, MODELS, ModelPathMapping } from "@/model/common/const";
+import { MODELS, type ModelName, ModelPathMapping } from "@/model/common/const";
 import {
-  ScrollArea,
-  Stack,
   Box,
   Flex,
-  Space,
   NavLink as NavLinkPrimitive,
-  NavLinkProps,
+  type NavLinkProps,
+  ScrollArea,
+  Space,
+  Stack,
   Text,
 } from "@mantine/core";
-import { Icon, IconFile, IconProps } from "@tabler/icons-react";
+import { type Icon, IconFile, type IconProps } from "@tabler/icons-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { FC, ForwardRefExoticComponent, RefAttributes } from "react";
+import type { FC, ForwardRefExoticComponent, RefAttributes } from "react";
 
 type NavGroup = {
   label: string;
