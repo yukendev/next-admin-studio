@@ -7,7 +7,7 @@ for (const [name, colors] of Object.entries(DEFAULT_THEME.colors)) {
       obj[index] = color;
       return obj;
     },
-    {}
+    {},
   );
 }
 
