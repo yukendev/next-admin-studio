@@ -3,7 +3,7 @@ import { create } from "zustand";
 import {
   type ValidationSlice,
   validationSlice,
-} from "@/model/common/store/slice/validation-phase";
+} from "@/model/common/store/slice/validation";
 
 import {
   type AdminLabelSlice,
