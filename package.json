@@ -7,15 +7,35 @@
     "node": "20.x"
   },
   "scripts": {
-    "dev": "next dev --turbopack",
-    "build": "next build",
+    "dev": "dotenvx run -f .env.development -- next dev --turbopack",
+    "dev:stg": "dotenvx run -f .env.staging -- next dev",
+    "dev:prod": "dotenvx run -f .env.production -- next dev",
+    "build": "dotenvx run -f .env.production -- next build",
+    "build:dev": "dotenvx run -f .env.development -- next build",
+    "build:stg": "dotenvx run -f .env.staging -- next build",
     "start": "next start",
-    "lint": "next lint"
+    "check": "biome check --write",
+    "setenv:dev": "dotenvx set -f .env.development",
+    "setenv:stg": "dotenvx set -f .env.staging",
+    "setenv:prod": "dotenvx set -f .env.production"
   },
   "dependencies": {
+    "@dotenvx/dotenvx": "^1.24.2",
+    "@mantine/core": "^7.14.1",
+    "@mantine/dates": "^7.14.1",
+    "@mantine/hooks": "^7.14.1",
+    "@mantine/modals": "^7.14.1",
+    "@mantine/notifications": "^7.14.1",
+    "@mantine/nprogress": "^7.14.1",
+    "@tabler/icons-react": "^3.22.0",
+    "client-only": "^0.0.1",
+    "dayjs": "^1.11.13",
     "next": "15.0.3",
     "react": "19.0.0-rc-66855b96-20241106",
-    "react-dom": "19.0.0-rc-66855b96-20241106"
+    "react-dom": "19.0.0-rc-66855b96-20241106",
+    "server-only": "^0.0.1",
+    "valibot": "1.0.0-beta.7",
+    "zustand": "^5.0.1"
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
