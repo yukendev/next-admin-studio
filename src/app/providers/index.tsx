@@ -1,7 +1,7 @@
-import { FC, PropsWithChildren } from "react";
+import type { FC, PropsWithChildren } from "react";
 
-import { MantineProvider } from "./mantine";
 import { DayJSProvider } from "./dayjs";
+import { MantineProvider } from "./mantine";
 
 export const Providers: FC<PropsWithChildren> = ({ children }) => (
   <DayJSProvider>
