@@ -1,4 +1,4 @@
-import { useProfileCardFormStore } from "../../../store";
+import { useProfileCardFormStore } from "../../../store/hook";
 
 export const useProfileCardTagsInput = () => {
   const value = useProfileCardFormStore((state) => state.tags);

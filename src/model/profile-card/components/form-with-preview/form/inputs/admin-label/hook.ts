@@ -1,4 +1,4 @@
-import { useProfileCardFormStore } from "../../../store";
+import { useProfileCardFormStore } from "../../../store/hook";
 
 export const useProfileCardAdminLabelInput = () => {
   const value = useProfileCardFormStore((state) => state.adminLabel);

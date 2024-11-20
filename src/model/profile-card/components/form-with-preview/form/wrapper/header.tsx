@@ -7,7 +7,7 @@ export const ProfileCardFormHeader: FC = () => {
   return (
     <>
       <Flex justify="space-between" align="center" p="lg">
-        <Title order={3}>プロフィールカード 詳細</Title>
+        <Title order={3}>プロフィールカード </Title>
         <FormMenuButton
           // TODO: 実装
           onDelete={() => {}}

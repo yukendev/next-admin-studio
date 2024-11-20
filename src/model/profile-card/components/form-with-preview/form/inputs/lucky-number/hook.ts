@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { useProfileCardFormStore } from "../../../store";
+import { useProfileCardFormStore } from "../../../store/hook";
 
 export const useProfileCardLuckyNumberInput = () => {
   const value = useProfileCardFormStore((state) => state.luckyNumber);

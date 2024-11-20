@@ -1,5 +1,5 @@
 import { ProfileCardLuckyNumberPreviewView } from "../../../preview/lucky-number";
-import { useProfileCardFormStore } from "../../store";
+import { useProfileCardFormStore } from "../../store/hook";
 
 export const ProfileCardLuckyNumberPreviewContainer = () => {
   const luckyNumber = useProfileCardFormStore((state) => state.luckyNumber);
