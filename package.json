@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "@dotenvx/dotenvx": "^1.24.2",
+    "@internationalized/date": "^3.5.6",
     "@mantine/core": "^7.14.1",
     "@mantine/dates": "^7.14.1",
     "@mantine/hooks": "^7.14.1",
@@ -32,9 +33,12 @@
     "dayjs": "^1.11.13",
     "next": "15.0.3",
     "react": "19.0.0-rc-66855b96-20241106",
+    "react-aria": "^3.35.1",
+    "react-aria-components": "^1.4.1",
     "react-dom": "19.0.0-rc-66855b96-20241106",
     "remeda": "^2.17.3",
     "server-only": "^0.0.1",
+    "ts-pattern": "^5.5.0",
     "valibot": "1.0.0-beta.7",
     "zustand": "^5.0.1"
   },
