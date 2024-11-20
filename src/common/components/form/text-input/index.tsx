@@ -7,7 +7,7 @@ import { isEmpty } from "@/common/lib/guard";
 
 import { ErrorMessages } from "../error-messages";
 import { getInputStyles } from "../styles";
-import { CostomInputProps } from "../type";
+import type { CostomInputProps } from "../type";
 
 type Props = ComponentProps<"input"> &
   CostomInputProps & {
@@ -28,7 +28,7 @@ export const TextInput: FC<Props> = ({
     (e: React.ChangeEvent<HTMLInputElement>) => {
       setValue?.(e.currentTarget.value);
     },
-    [setValue]
+    [setValue],
   );
 
   return (

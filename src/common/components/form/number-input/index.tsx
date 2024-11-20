@@ -6,9 +6,9 @@ import type { FC } from "react";
 
 import { isEmpty } from "@/common/lib/guard";
 
+import { ErrorMessages } from "../error-messages";
 import { getInputStyles } from "../styles";
 import type { CostomInputProps } from "../type";
-import { ErrorMessages } from "../error-messages";
 
 type Props = NumberInputProps & CostomInputProps;
 
