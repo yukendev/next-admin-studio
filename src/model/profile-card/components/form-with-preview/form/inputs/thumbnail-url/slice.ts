@@ -4,6 +4,7 @@ import type { GalleryItem } from "@/common/components/form/file-input-with-galle
 import { getValidationtErrorMessage } from "@/model/common/lib/get-validation-error-message";
 import type { FormInputSliceCreater } from "@/model/common/types/form-input-slice";
 
+import { match } from "ts-pattern";
 import {
   validateProfileCardThumbnailUrlOnChange,
   validateProfileCardThumbnailUrlOnSubmit,
@@ -19,6 +20,7 @@ export type ThumbnailUrlSlice = {
   // アップロードした画像
   thumbnailUrlInputFile: File | null;
 
+  getThumbnailUploadedUrl: () => string | null;
   setThumbnailUploadedUrl: (thumbnailUrl: string | null) => void;
   setThumbnailUrlInputType: (inputType: InputType) => void;
   setThumbnailUrlInputFile: (file: File | null) => void;
@@ -35,6 +37,13 @@ export const createThumbnailUrlSlice: FormInputSliceCreater<
   thumbnailUrlGalleryItem: null,
   thumbnailUrlInputFile: null,
 
+  getThumbnailUploadedUrl: () => {
+    const thumbnailUrlInputType = get().thumbnailUrlInputType;
+    return match(thumbnailUrlInputType)
+      .with("select", () => get().thumbnailUrlGalleryItem?.url ?? null)
+      .with("upload", () => get().thumbnailUploadedUrl)
+      .otherwise(() => null);
+  },
   setThumbnailUploadedUrl: (thumbnailUrl) => {
     set({ thumbnailUploadedUrl: thumbnailUrl });
     // TODO: 諸々の処理
