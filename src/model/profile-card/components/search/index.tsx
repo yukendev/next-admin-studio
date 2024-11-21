@@ -1,9 +1,7 @@
 "use client";
 
-import { Button } from "@mantine/core";
+import { Button, Stack } from "@mantine/core";
 import { useRouter } from "next/navigation";
-import type { FormEventHandler } from "react";
-
 import { createSerializer } from "nuqs";
 import { useProfileCardSearchStore } from "./hook";
 import { FreeWordFormInput } from "./input/free-word";
@@ -14,14 +12,12 @@ export const profileCardSearchParamsSerializer = createSerializer(
   profileCardSearchParams,
 );
 
-export const ProfileCardSearchView = () => {
+const SearchButton = () => {
   const router = useRouter();
   const freeWord = useProfileCardSearchStore((state) => state.freeWord);
   const storeCode = useProfileCardSearchStore((state) => state.storeCode);
 
-  const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
-    event.preventDefault();
-
+  const handleSubmit = () => {
     // シリアライザーでパース
     const paramsString = profileCardSearchParamsSerializer({
       freeWord: freeWord === "" ? undefined : freeWord,
@@ -31,13 +27,16 @@ export const ProfileCardSearchView = () => {
     // router.push
     router.push(`/profile-cards${paramsString}`);
   };
+  return <Button onClick={handleSubmit}>検索</Button>;
+};
 
+export const ProfileCardSearchView = () => {
   return (
-    <form onSubmit={handleSubmit}>
+    <Stack>
       <FreeWordFormInput />
       <StoreCodeFormInput />
 
-      <Button type="submit">検索</Button>
-    </form>
+      <SearchButton />
+    </Stack>
   );
 };
