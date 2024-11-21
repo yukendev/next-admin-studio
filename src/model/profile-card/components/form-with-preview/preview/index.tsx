@@ -14,8 +14,8 @@ const FormValueStringifying = () => {
   const birthday = useProfileCardFormStore((state) => state.birthday);
   const luckyNumber = useProfileCardFormStore((state) => state.luckyNumber);
   const tags = useProfileCardFormStore((state) => state.tags);
-  const thumbnailUploadedUrl = useProfileCardFormStore((state) =>
-    state.getThumbnailUploadedUrl(),
+  const thumbnailUploadedUrl = useProfileCardFormStore(
+    (state) => state.thumbnailUploadedUrl,
   );
 
   const formValue = {

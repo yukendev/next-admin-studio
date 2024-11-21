@@ -20,7 +20,6 @@ export type ThumbnailUrlSlice = {
   // アップロードした画像
   thumbnailUrlInputFile: File | null;
 
-  getThumbnailUploadedUrl: () => string | null;
   setThumbnailUploadedUrl: (thumbnailUrl: string | null) => void;
   setThumbnailUrlInputType: (inputType: InputType) => void;
   setThumbnailUrlInputFile: (file: File | null) => void;
@@ -32,18 +31,13 @@ export type ThumbnailUrlSlice = {
 export const createThumbnailUrlSlice: FormInputSliceCreater<
   ThumbnailUrlSlice
 > = (set, get) => ({
-  thumbnailUploadedUrl: null,
+  thumbnailUploadedUrl: match(get().thumbnailUrlInputType)
+    .with("select", () => get().thumbnailUrlGalleryItem?.url ?? null)
+    .with("upload", () => get().thumbnailUploadedUrl)
+    .otherwise(() => null),
   thumbnailUrlInputType: "select",
   thumbnailUrlGalleryItem: null,
   thumbnailUrlInputFile: null,
-
-  getThumbnailUploadedUrl: () => {
-    const thumbnailUrlInputType = get().thumbnailUrlInputType;
-    return match(thumbnailUrlInputType)
-      .with("select", () => get().thumbnailUrlGalleryItem?.url ?? null)
-      .with("upload", () => get().thumbnailUploadedUrl)
-      .otherwise(() => null);
-  },
   setThumbnailUploadedUrl: (thumbnailUrl) => {
     set({ thumbnailUploadedUrl: thumbnailUrl });
     // TODO: 諸々の処理
