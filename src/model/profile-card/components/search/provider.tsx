@@ -14,11 +14,8 @@ export const ProfileCardSearchStoreProvider: FC<{
 }> = ({ children, initialState }) => {
   const storeRef = useRef<ReturnType<typeof createProfileCardSearchStore>>();
 
-  if (!storeRef.current && initialState) {
-    storeRef.current = createProfileCardSearchStore({
-      freeWord: initialState.freeWord,
-      storeCode: initialState.storeCode,
-    });
+  if (!storeRef.current) {
+    storeRef.current = createProfileCardSearchStore(initialState);
   }
 
   return (
