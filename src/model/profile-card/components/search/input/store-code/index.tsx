@@ -1,19 +1,23 @@
-import { Checkbox, Group } from "@mantine/core"
+import { Checkbox, Group } from "@mantine/core";
+import { useProfileCardSearchStore } from "../../hook";
 
 export const StoreCodeFormInput = () => {
+  const storeCode = useProfileCardSearchStore((state) => state.storeCode);
+  const setStoreCode = useProfileCardSearchStore((state) => state.setStoreCode);
+
   return (
     <Checkbox.Group
-      defaultValue={['react']}
-      label="Select your favorite frameworks/libraries"
-      description="This is anonymous"
+      value={storeCode}
+      onChange={(value) => setStoreCode(value)}
+      label="店舗"
       withAsterisk
     >
       <Group mt="xs">
-        <Checkbox value="react" label="React" />
-        <Checkbox value="svelte" label="Svelte" />
-        <Checkbox value="ng" label="Angular" />
-        <Checkbox value="vue" label="Vue" />
+        <Checkbox value="0001" label="店舗1" />
+        <Checkbox value="0002" label="店舗2" />
+        <Checkbox value="0003" label="店舗3" />
+        <Checkbox value="0004" label="店舗4" />
       </Group>
     </Checkbox.Group>
-  )
-}
+  );
+};
