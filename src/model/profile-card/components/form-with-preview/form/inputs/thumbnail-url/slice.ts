@@ -3,8 +3,8 @@ import type { GalleryItem } from "@/common/components/form/file-input-with-galle
 
 import { getValidationtErrorMessage } from "@/model/common/lib/get-validation-error-message";
 import type { FormInputSliceCreater } from "@/model/common/types/form-input-slice";
-
 import { match } from "ts-pattern";
+import { getGalleryItem, isGalleryItem } from "./lib";
 import {
   validateProfileCardThumbnailUrlOnChange,
   validateProfileCardThumbnailUrlOnSubmit,
@@ -29,15 +29,26 @@ export type ThumbnailUrlSlice = {
 };
 
 export const createThumbnailUrlSlice: FormInputSliceCreater<
-  ThumbnailUrlSlice
-> = (set, get) => ({
+  ThumbnailUrlSlice,
+  "thumbnailUploadedUrl"
+> = (initialState) => (set, get) => ({
+  // initialStateを利用して各stateを初期化
   thumbnailUploadedUrl: match(get().thumbnailUrlInputType)
     .with("select", () => get().thumbnailUrlGalleryItem?.url ?? null)
     .with("upload", () => get().thumbnailUploadedUrl)
     .otherwise(() => null),
-  thumbnailUrlInputType: "select",
-  thumbnailUrlGalleryItem: null,
-  thumbnailUrlInputFile: null,
+  thumbnailUrlInputType: isGalleryItem(initialState?.thumbnailUploadedUrl)
+    ? "select"
+    : "upload",
+  thumbnailUrlGalleryItem: initialState?.thumbnailUploadedUrl
+    ? getGalleryItem(initialState?.thumbnailUploadedUrl)
+    : null,
+  thumbnailUrlInputFile: initialState?.thumbnailUploadedUrl
+    ? isGalleryItem(initialState?.thumbnailUploadedUrl)
+      ? null
+      : new File([], "")
+    : null,
+
   setThumbnailUploadedUrl: (thumbnailUrl) => {
     set({ thumbnailUploadedUrl: thumbnailUrl });
     // TODO: 諸々の処理

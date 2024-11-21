@@ -13,24 +13,22 @@ export type NameSlice = {
   getNameIsValid: () => boolean;
 };
 
-export const createNameSlice: FormInputSliceCreater<NameSlice> = (
-  set,
-  get,
-) => ({
-  name: "",
-  setName: (name) => set({ name }),
-  getNameErrorMessages: () => {
-    const value = get().name;
-    return getValidationtErrorMessage({
-      phase: get().validationPhase,
-      validations: {
-        onChange: validateProfileCardNameOnChange(value),
-        onConfirmSubmit: validateProfileCardNameOnSubmit(value),
-      },
-    });
-  },
-  getNameIsValid: () => {
-    const errorMessages = get().getNameErrorMessages();
-    return errorMessages.length === 0;
-  },
-});
+export const createNameSlice: FormInputSliceCreater<NameSlice, "name"> =
+  (initialState) => (set, get) => ({
+    name: initialState?.name ?? "",
+    setName: (name) => set({ name }),
+    getNameErrorMessages: () => {
+      const value = get().name;
+      return getValidationtErrorMessage({
+        phase: get().validationPhase,
+        validations: {
+          onChange: validateProfileCardNameOnChange(value),
+          onConfirmSubmit: validateProfileCardNameOnSubmit(value),
+        },
+      });
+    },
+    getNameIsValid: () => {
+      const errorMessages = get().getNameErrorMessages();
+      return errorMessages.length === 0;
+    },
+  });

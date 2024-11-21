@@ -13,13 +13,13 @@ export const createProfileCardFormStore = (initialState?: ProfileCardForm) =>
   create<ProfileCardFormStore>()((set, get, store) => {
     return {
       ...validationSlice(set, get, store),
-      ...createAdminLabelSlice(set, get, store),
-      ...createBirthdaySlice(set, get, store),
-      ...createLuckyNumberSlice(set, get, store),
-      ...createNameSlice(set, get, store),
-      ...createTagsSlice(set, get, store),
-      ...createThumbnailUrlSlice(set, get, store),
-      id: "",
+      ...createAdminLabelSlice(initialState)(set, get, store),
+      ...createBirthdaySlice(initialState)(set, get, store),
+      ...createLuckyNumberSlice(initialState)(set, get, store),
+      ...createNameSlice(initialState)(set, get, store),
+      ...createTagsSlice(initialState)(set, get, store),
+      ...createThumbnailUrlSlice(initialState)(set, get, store),
+      id: initialState?.id ?? "",
       setId: (id) => set({ id }),
       setProfileCardForm: (profileCardForm) =>
         set({
@@ -29,13 +29,15 @@ export const createProfileCardFormStore = (initialState?: ProfileCardForm) =>
           luckyNumber: profileCardForm.luckyNumber,
           name: profileCardForm.name,
           tags: profileCardForm.tags,
+          thumbnailUploadedUrl: profileCardForm.thumbnailUploadedUrl,
         }),
       getFormIsValid: () =>
         get().getAdminLabelIsValid() &&
         get().getBirthdayIsValid() &&
         get().getLuckyNumberIsValid() &&
         get().getNameIsValid() &&
-        get().getTagsIsValid(),
+        get().getTagsIsValid() &&
+        get().getThumbnailUrlIsValid(),
       getFormValue: () => ({
         id: get().id,
         adminLabel: get().adminLabel,
@@ -43,7 +45,7 @@ export const createProfileCardFormStore = (initialState?: ProfileCardForm) =>
         luckyNumber: get().luckyNumber,
         name: get().name,
         tags: get().tags,
+        thumbnailUploadedUrl: get().thumbnailUploadedUrl,
       }),
-      ...initialState,
     };
   });
