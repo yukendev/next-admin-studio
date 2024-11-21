@@ -3,15 +3,15 @@ import type { GalleryItem } from "./type";
 // TODO: 環境ごとに切り替え
 export const GALLERY_ITEMS: GalleryItem[] = [
   {
-    url: "",
+    url: "/vercel.svg",
     alt: "サンプル画像1",
   },
   {
-    url: "",
+    url: "/vercel.svg",
     alt: "サンプル画像2",
   },
   {
-    url: "",
+    url: "/vercel.svg",
     alt: "サンプル画像3",
   },
 ];
