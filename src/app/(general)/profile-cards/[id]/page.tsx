@@ -1,5 +1,5 @@
 import { ProfileCardFormWithPreview } from "@/model/profile-card/components/form-with-preview";
 
-export default function ProfileCardDetailPage() {
+export default async function ProfileCardDetailPage() {
   return <ProfileCardFormWithPreview />;
-};
+}

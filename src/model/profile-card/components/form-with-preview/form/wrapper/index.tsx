@@ -2,6 +2,7 @@
 
 import { Box, Flex, Stack } from "@mantine/core";
 import type { FC, PropsWithChildren } from "react";
+import { useProfileCardFormServerState } from "../../server-state/hook";
 import { ProfileCardFormFooter } from "./footer";
 import { ProfileCardFormHeader } from "./header";
 
@@ -13,6 +14,14 @@ const STYLES = {
   CONTAINER: {
     flexGrow: "1",
   },
+};
+
+const Jikken = () => {
+  const serverState = useProfileCardFormServerState();
+  if (!serverState) {
+    return <div>new</div>;
+  }
+  return <div>{JSON.stringify(serverState)}</div>;
 };
 
 export const ProfileCardFormWrapper: FC<PropsWithChildren> = ({ children }) => {
@@ -36,6 +45,7 @@ export const ProfileCardFormWrapper: FC<PropsWithChildren> = ({ children }) => {
         <ProfileCardFormHeader />
         <Stack gap="lg" px="lg" py="lg">
           {children}
+          <Jikken />
         </Stack>
       </Box>
       <ProfileCardFormFooter />

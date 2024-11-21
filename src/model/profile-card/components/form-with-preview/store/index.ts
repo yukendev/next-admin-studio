@@ -6,9 +6,9 @@ import { createBirthdaySlice } from "../form/inputs/birthday/slice";
 import { createLuckyNumberSlice } from "../form/inputs/lucky-number/slice";
 import { createNameSlice } from "../form/inputs/name/slice";
 import { createTagsSlice } from "../form/inputs/tags/slice";
-import type { ProfileCardFormStore } from "./type";
+import type { ProfileCardForm, ProfileCardFormStore } from "./type";
 
-export const createProfileCardFormStore = () =>
+export const createProfileCardFormStore = (initialState?: ProfileCardForm) =>
   create<ProfileCardFormStore>()((set, get, store) => {
     return {
       ...validationSlice(set, get, store),
@@ -17,8 +17,11 @@ export const createProfileCardFormStore = () =>
       ...createLuckyNumberSlice(set, get, store),
       ...createNameSlice(set, get, store),
       ...createTagsSlice(set, get, store),
+      id: "",
+      setId: (id) => set({ id }),
       setProfileCardForm: (profileCardForm) =>
         set({
+          id: profileCardForm.id,
           adminLabel: profileCardForm.adminLabel,
           birthday: profileCardForm.birthday,
           luckyNumber: profileCardForm.luckyNumber,
@@ -32,11 +35,13 @@ export const createProfileCardFormStore = () =>
         get().getNameIsValid() &&
         get().getTagsIsValid(),
       getFormValue: () => ({
+        id: get().id,
         adminLabel: get().adminLabel,
         birthday: get().birthday,
         luckyNumber: get().luckyNumber,
         name: get().name,
         tags: get().tags,
       }),
+      ...initialState,
     };
   });

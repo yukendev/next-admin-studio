@@ -6,6 +6,7 @@ import type { NameSlice } from "../form/inputs/name/slice";
 import type { TagsSlice } from "../form/inputs/tags/slice";
 
 export type ProfileCardForm = {
+  id: string;
   adminLabel: string;
   birthday: Date | null;
   luckyNumber: number;
@@ -14,6 +15,8 @@ export type ProfileCardForm = {
 };
 
 export type ProfileCardFormSlice = {
+  id: string;
+  setId: (id: string) => void;
   getFormValue: () => ProfileCardForm;
   setProfileCardForm: (profileCardForm: ProfileCardForm) => void;
 };
