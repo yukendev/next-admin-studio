@@ -6,6 +6,7 @@ import { createBirthdaySlice } from "../form/inputs/birthday/slice";
 import { createLuckyNumberSlice } from "../form/inputs/lucky-number/slice";
 import { createNameSlice } from "../form/inputs/name/slice";
 import { createTagsSlice } from "../form/inputs/tags/slice";
+import { createThumbnailUrlSlice } from "../form/inputs/thumbnail-url/slice";
 import type { ProfileCardForm, ProfileCardFormStore } from "./type";
 
 export const createProfileCardFormStore = (initialState?: ProfileCardForm) =>
@@ -17,6 +18,7 @@ export const createProfileCardFormStore = (initialState?: ProfileCardForm) =>
       ...createLuckyNumberSlice(set, get, store),
       ...createNameSlice(set, get, store),
       ...createTagsSlice(set, get, store),
+      ...createThumbnailUrlSlice(set, get, store),
       id: "",
       setId: (id) => set({ id }),
       setProfileCardForm: (profileCardForm) =>
