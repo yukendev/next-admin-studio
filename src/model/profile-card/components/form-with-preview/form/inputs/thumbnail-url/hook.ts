@@ -1,8 +1,13 @@
 import type { InputType } from "@/common/components/form/file-input-with-gallery-select";
 import { useCallback } from "react";
+import { match } from "ts-pattern";
 import { useProfileCardFormStore } from "../../../store/hook";
 
 export const useProfileCardThumbnailUrlInput = () => {
+  const setUploadedUrl = useProfileCardFormStore(
+    (state) => state.setThumbnailUploadedUrl,
+  );
+
   // InputType選択ラジオボタン関係の処理
   const inputType = useProfileCardFormStore(
     (state) => state.thumbnailUrlInputType,
@@ -12,15 +17,19 @@ export const useProfileCardThumbnailUrlInput = () => {
   );
   const handleRadioChange = (inputType: string) => {
     setInputType(inputType as InputType);
+    match(inputType)
+      .with("upload", () => {
+        setUploadedUrl(fileInput.url);
+      })
+      .with("select", () => {
+        setUploadedUrl(galleryItem?.url ?? null);
+      });
   };
 
   // FileInput関係の処理
-  const file = useProfileCardFormStore((state) => state.thumbnailUrlInputFile);
-  const setUploadedUrl = useProfileCardFormStore(
-    (state) => state.setThumbnailUploadedUrl,
-  );
+  const fileInput = useProfileCardFormStore((state) => state.fileInput);
   const setFile = useProfileCardFormStore(
-    (state) => state.setThumbnailUrlInputFile,
+    (state) => state.setThumbnailUrlFileInput,
   );
   const onUpload = useCallback(
     async (file: File | null) => {
@@ -28,18 +37,17 @@ export const useProfileCardThumbnailUrlInput = () => {
       const uploadedUrl = "example.com/uploaded-file";
 
       // アップロードしたファイルをストアに保存
-      setUploadedUrl(uploadedUrl);
-      setFile(file);
+      setFile({ file, url: uploadedUrl });
     },
-    [setUploadedUrl, setFile],
+    [setFile],
   );
 
   // GallerySelect関係の処理
   const galleryItem = useProfileCardFormStore(
-    (state) => state.thumbnailUrlGalleryItem,
+    (state) => state.galleryInput.thumbnailUrlGalleryItem,
   );
   const setGalleryItem = useProfileCardFormStore(
-    (state) => state.setThumbnailUrlGalleryItem,
+    (state) => state.setThumbnailUrlGalleryInput,
   );
 
   const getErrorMessages = useProfileCardFormStore(
@@ -49,7 +57,7 @@ export const useProfileCardThumbnailUrlInput = () => {
   const errorMessages = getErrorMessages();
 
   return {
-    fileInputProps: { value: file, onChange: onUpload },
+    fileInputProps: { value: fileInput.file, onChange: onUpload },
     gallerySelectProps: {
       value: galleryItem,
       onChange: setGalleryItem,
