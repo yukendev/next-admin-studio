@@ -13,7 +13,7 @@ export type ProfileCardForm = {
   luckyNumber: number;
   name: string;
   tags: string[];
-  thumbnailUploadedUrl: string | null;
+  thumbnailUrl: string | null;
 };
 
 export type ProfileCardFormSlice = {

@@ -29,7 +29,7 @@ export const createProfileCardFormStore = (initialState?: ProfileCardForm) =>
           luckyNumber: profileCardForm.luckyNumber,
           name: profileCardForm.name,
           tags: profileCardForm.tags,
-          thumbnailUrl: profileCardForm.thumbnailUploadedUrl,
+          thumbnailUrl: profileCardForm.thumbnailUrl,
         }),
       getFormIsValid: () =>
         get().getAdminLabelIsValid() &&
@@ -45,7 +45,7 @@ export const createProfileCardFormStore = (initialState?: ProfileCardForm) =>
         luckyNumber: get().luckyNumber,
         name: get().name,
         tags: get().tags,
-        thumbnailUploadedUrl: get().thumbnailUrl,
+        thumbnailUrl: get().thumbnailUrl,
       }),
     };
   });
