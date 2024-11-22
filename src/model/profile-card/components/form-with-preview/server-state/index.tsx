@@ -6,7 +6,7 @@ import { ProfileCardFormServerStateProvider } from "./provider";
 
 export const ProfileCardFormServerStateProviderContainer: FC<{
   id: string;
-  children: (formValue: ProfileCardForm | undefined) => ReactNode;
+  children: (formValue: ProfileCardForm) => ReactNode;
 }> = async ({ id, children }) => {
   const serverState = await getProfileCard(id);
   const formValue = profileCardConverter.toClient(serverState);

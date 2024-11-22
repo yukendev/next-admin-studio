@@ -1,8 +1,8 @@
+import type { FileInputWithGalleryValue } from "@/common/components/form/file-input-with-gallery-select/type";
 import { getGalleryItem, isGalleryItem } from "./lib";
-import type { ProfileCardThumbnailUrlInputType } from "./type";
 
 export const profileCardThumbnailUrlConverter = {
-  toClient: (value: string | null): ProfileCardThumbnailUrlInputType => {
+  toClient: (value: string | null): FileInputWithGalleryValue => {
     const thumbnailUrlInputType = isGalleryItem(value)
       ? ("select" as const)
       : ("upload" as const);
@@ -18,12 +18,12 @@ export const profileCardThumbnailUrlConverter = {
     const fileInputUrl = thumbnailUrlInputType === "upload" ? value : null;
 
     return {
-      thumbnailUrl: value ?? null,
-      thumbnailUrlInputType,
-      thumbnailUrlGalleryInput: {
+      url: value ?? null,
+      inputType: thumbnailUrlInputType,
+      galleryInput: {
         item: thumbnailUrlGalleryItem,
       },
-      thumbnailUrlFileInput: {
+      fileInput: {
         file: thumbnailUrlInputFile,
         url: fileInputUrl,
       },

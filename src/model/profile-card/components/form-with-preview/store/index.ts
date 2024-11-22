@@ -9,7 +9,7 @@ import { createTagsSlice } from "../form/inputs/tags/slice";
 import { createThumbnailUrlSlice } from "../form/inputs/thumbnail-url/slice";
 import type { ProfileCardForm, ProfileCardFormStore } from "./type";
 
-export const createProfileCardFormStore = (initialState?: ProfileCardForm) =>
+export const createProfileCardFormStore = (initialState: ProfileCardForm) =>
   create<ProfileCardFormStore>()((set, get, store) => {
     return {
       ...validationSlice(set, get, store),
@@ -23,13 +23,7 @@ export const createProfileCardFormStore = (initialState?: ProfileCardForm) =>
       setId: (id) => set({ id }),
       setProfileCardForm: (profileCardForm) =>
         set({
-          id: profileCardForm.id,
-          adminLabel: profileCardForm.adminLabel,
-          birthday: profileCardForm.birthday,
-          luckyNumber: profileCardForm.luckyNumber,
-          name: profileCardForm.name,
-          tags: profileCardForm.tags,
-          thumbnailUrl: profileCardForm.thumbnailUrl,
+          ...profileCardForm,
         }),
       getFormIsValid: () =>
         get().getAdminLabelIsValid() &&
@@ -38,14 +32,6 @@ export const createProfileCardFormStore = (initialState?: ProfileCardForm) =>
         get().getNameIsValid() &&
         get().getTagsIsValid() &&
         get().getThumbnailUrlIsValid(),
-      getFormValue: () => ({
-        id: get().id,
-        adminLabel: get().adminLabel,
-        birthday: get().birthday,
-        luckyNumber: get().luckyNumber,
-        name: get().name,
-        tags: get().tags,
-        thumbnailUrl: get().thumbnailUrl,
-      }),
+      getFormValue: get,
     };
   });

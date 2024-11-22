@@ -1,3 +1,5 @@
+import type { FileInputWithGalleryValue } from "@/common/components/form/file-input-with-gallery-select/type";
+
 export const isGalleryItem = (_url: string | undefined | null) => {
   return false;
 };
@@ -6,7 +8,9 @@ export const getGalleryItem = (_url: string) => {
   return null;
 };
 
-export const getThumbnailUrlValue = (thumbnailUrl: string | null) => {
+export const getThumbnailUrlValue = (
+  thumbnailUrl: string | null,
+): FileInputWithGalleryValue => {
   const thumbnailUrlInputType = isGalleryItem(thumbnailUrl)
     ? ("select" as const)
     : ("upload" as const);
@@ -24,12 +28,12 @@ export const getThumbnailUrlValue = (thumbnailUrl: string | null) => {
   const fileInputUrl = thumbnailUrlInputType === "upload" ? thumbnailUrl : null;
 
   return {
-    thumbnailUrl,
-    thumbnailUrlInputType,
-    thumbnailUrlGalleryInput: {
+    url: thumbnailUrl,
+    inputType: thumbnailUrlInputType,
+    galleryInput: {
       item: thumbnailUrlGalleryItem,
     },
-    thumbnailUrlFileInput: {
+    fileInput: {
       file: thumbnailUrlInputFile,
       url: fileInputUrl,
     },

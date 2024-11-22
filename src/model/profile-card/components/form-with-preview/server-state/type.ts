@@ -6,4 +6,5 @@ export type ProfileCardFormServerState = {
   name: string;
   tags: string[];
   creationStatus: "DRAFT" | "CONFIRMED";
+  thumbnailUrl: string | null;
 };
