@@ -13,11 +13,11 @@ export type AdminLabelSlice = {
   getAdminLabelIsValid: () => boolean;
 };
 
-export const createAdminLabelSlice: FormInputSliceCreater<AdminLabelSlice> = (
-  set,
-  get,
-) => ({
-  adminLabel: "",
+export const createAdminLabelSlice: FormInputSliceCreater<
+  AdminLabelSlice,
+  "adminLabel"
+> = (initialState) => (set, get) => ({
+  adminLabel: initialState?.adminLabel ?? "",
   setAdminLabel: (adminLabel) => set({ adminLabel }),
   getAdminLabelErrorMessages: () => {
     const value = get().adminLabel;

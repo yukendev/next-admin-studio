@@ -4,6 +4,7 @@ import type { BirthdaySlice } from "../form/inputs/birthday/slice";
 import type { LuckyNumberSlice } from "../form/inputs/lucky-number/slice";
 import type { NameSlice } from "../form/inputs/name/slice";
 import type { TagsSlice } from "../form/inputs/tags/slice";
+import type { ThumbnailUrlSlice } from "../form/inputs/thumbnail-url/slice";
 
 export type ProfileCardForm = {
   id: string;
@@ -12,6 +13,7 @@ export type ProfileCardForm = {
   luckyNumber: number;
   name: string;
   tags: string[];
+  thumbnailUrl: string | null;
 };
 
 export type ProfileCardFormSlice = {
@@ -26,6 +28,7 @@ export type ProfileCardFormStore = AdminLabelSlice &
   LuckyNumberSlice &
   NameSlice &
   TagsSlice &
+  ThumbnailUrlSlice &
   ValidationSlice &
   ProfileCardFormSlice & {
     getFormIsValid: () => boolean;
