@@ -9,6 +9,7 @@ export const PROFILE_CARD_MOCK_DATA: ProfileCardFormServerState[] = [
     luckyNumber: 1,
     name: "テストユーザー1",
     tags: ["タグ1", "タグ2", "タグ3"],
+    thumbnailUrl: "https://example.com/thumbnail.jpg",
   },
   {
     id: "2",
@@ -18,6 +19,7 @@ export const PROFILE_CARD_MOCK_DATA: ProfileCardFormServerState[] = [
     luckyNumber: 2,
     name: "テストユーザー2",
     tags: ["タグ4", "タグ5", "タグ6"],
+    thumbnailUrl: "https://example.com/thumbnail.jpg",
   },
 ];
 

@@ -24,6 +24,7 @@ export const profileCardConverter = {
       birthday: clientState.birthday
         ? clientState.birthday.toISOString()
         : null,
+      thumbnailUrl: clientState.thumbnailUrl.url,
     };
   },
 };
