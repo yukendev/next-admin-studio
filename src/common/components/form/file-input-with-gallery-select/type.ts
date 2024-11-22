@@ -3,12 +3,12 @@ import type { GalleryItem } from "./gallery-select/type";
 export type FileInputWithGalleryInputType = "select" | "upload";
 
 export type FileInputWithGalleryValue = {
-  thumbnailUrl: string | null;
-  thumbnailUrlInputType: FileInputWithGalleryInputType;
-  thumbnailUrlGalleryInput: {
+  url: string | null;
+  inputType: FileInputWithGalleryInputType;
+  galleryInput: {
     item: GalleryItem | null;
   };
-  thumbnailUrlFileInput: {
+  fileInput: {
     file: File | null;
     url: string | null;
   };
