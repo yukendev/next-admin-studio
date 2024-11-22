@@ -1,16 +1,9 @@
 import type { StateCreator } from "zustand";
 import type { ValidationPhase } from "../lib/get-validation-error-message";
 
-// export type FormInputSliceCreater<T> = StateCreator<
-//   T & { validationPhase: ValidationPhase },
-//   [],
-//   [],
-//   T
-// >;
-
 export type FormInputSliceCreater<
   T extends Record<string, unknown>,
-  S extends keyof T,
+  S extends object,
 > = (
-  arg: { [key in S]: T[key] } | undefined,
+  arg: S,
 ) => StateCreator<T & { validationPhase: ValidationPhase }, [], [], T>;
