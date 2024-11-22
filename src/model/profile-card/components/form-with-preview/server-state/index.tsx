@@ -9,6 +9,11 @@ export const ProfileCardFormServerStateProviderContainer: FC<{
   children: (formValue: ProfileCardForm) => ReactNode;
 }> = async ({ id, children }) => {
   const serverState = await getProfileCard(id);
+
+  if (!serverState) {
+    throw new Error("Profile card not found");
+  }
+
   const formValue = profileCardConverter.toClient(serverState);
 
   return (

@@ -9,7 +9,9 @@ import { createTagsSlice } from "../form/inputs/tags/slice";
 import { createThumbnailUrlSlice } from "../form/inputs/thumbnail-url/slice";
 import type { ProfileCardForm, ProfileCardFormStore } from "./type";
 
-export const createProfileCardFormStore = (initialState: ProfileCardForm) =>
+export const createProfileCardFormStore = (
+  initialState: ProfileCardForm,
+) =>
   create<ProfileCardFormStore>()((set, get, store) => {
     return {
       ...validationSlice(set, get, store),
