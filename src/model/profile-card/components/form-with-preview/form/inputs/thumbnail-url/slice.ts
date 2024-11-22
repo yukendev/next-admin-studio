@@ -11,21 +11,21 @@ import {
 
 export type ThumbnailUrlSlice = {
   // アップロードした画像のS3のURL
-  thumbnailUploadedUrl: string | null;
+  thumbnailUrl: string | null;
   // サムネイルがギャラリーから選択されているか、アップロードした画像から選択されているか
   thumbnailUrlInputType: InputType;
 
   // ギャラリーから選択された画像
-  galleryInput: {
-    thumbnailUrlGalleryItem: GalleryItem | null;
+  thumbnailUrlGalleryInput: {
+    item: GalleryItem | null;
   };
   // ファイル入力関連のstate
-  fileInput: {
+  thumbnailUrlFileInput: {
     file: File | null;
     url: string | null;
   };
 
-  setThumbnailUploadedUrl: (thumbnailUrl: string | null) => void;
+  setThumbnailUrl: (thumbnailUrl: string | null) => void;
   setThumbnailUrlInputType: (inputType: InputType) => void;
   setThumbnailUrlFileInput: (fileInput: {
     file: File | null;
@@ -38,35 +38,33 @@ export type ThumbnailUrlSlice = {
 
 export const createThumbnailUrlSlice: FormInputSliceCreater<
   ThumbnailUrlSlice,
-  "thumbnailUploadedUrl"
+  "thumbnailUrl"
 > = (initialState) => (set, get) => {
-  const initialValue = getThumbnailUrlValue(
-    initialState?.thumbnailUploadedUrl ?? null,
-  );
+  const initialValue = getThumbnailUrlValue(initialState?.thumbnailUrl ?? null);
 
   return {
     // initialStateを利用して各stateを初期化
     ...initialValue,
 
-    setThumbnailUploadedUrl: (thumbnailUrl) => {
+    setThumbnailUrl: (thumbnailUrl) => {
       set(getThumbnailUrlValue(thumbnailUrl));
     },
     setThumbnailUrlInputType: (inputType) => {
       set({ thumbnailUrlInputType: inputType });
     },
     setThumbnailUrlFileInput: (fileInput) => {
-      set({ fileInput });
+      set({ thumbnailUrlFileInput: fileInput });
     },
     setThumbnailUrlGalleryInput: (galleryItem) => {
       set({
-        galleryInput: {
-          ...get().galleryInput,
-          thumbnailUrlGalleryItem: galleryItem,
+        thumbnailUrlGalleryInput: {
+          ...get().thumbnailUrlGalleryInput,
+          item: galleryItem,
         },
       });
     },
     getThumbnailUrlErrorMessages: () => {
-      const value = get().thumbnailUploadedUrl;
+      const value = get().thumbnailUrl;
 
       return getValidationtErrorMessage({
         phase: get().validationPhase,

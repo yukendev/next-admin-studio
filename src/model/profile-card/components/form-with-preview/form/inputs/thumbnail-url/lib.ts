@@ -6,31 +6,30 @@ export const getGalleryItem = (_url: string) => {
   return null;
 };
 
-export const getThumbnailUrlValue = (thumbnailUploadedUrl: string | null) => {
-  const thumbnailUrlInputType = isGalleryItem(thumbnailUploadedUrl)
+export const getThumbnailUrlValue = (thumbnailUrl: string | null) => {
+  const thumbnailUrlInputType = isGalleryItem(thumbnailUrl)
     ? ("select" as const)
     : ("upload" as const);
 
-  const thumbnailUrlGalleryItem = thumbnailUploadedUrl
-    ? getGalleryItem(thumbnailUploadedUrl)
+  const thumbnailUrlGalleryItem = thumbnailUrl
+    ? getGalleryItem(thumbnailUrl)
     : null;
 
-  const thumbnailUrlInputFile = thumbnailUploadedUrl
-    ? isGalleryItem(thumbnailUploadedUrl)
+  const thumbnailUrlInputFile = thumbnailUrl
+    ? isGalleryItem(thumbnailUrl)
       ? null
       : new File([], "")
     : null;
 
-  const fileInputUrl =
-    thumbnailUrlInputType === "upload" ? thumbnailUploadedUrl : null;
+  const fileInputUrl = thumbnailUrlInputType === "upload" ? thumbnailUrl : null;
 
   return {
-    thumbnailUploadedUrl,
+    thumbnailUrl,
     thumbnailUrlInputType,
-    galleryInput: {
-      thumbnailUrlGalleryItem,
+    thumbnailUrlGalleryInput: {
+      item: thumbnailUrlGalleryItem,
     },
-    fileInput: {
+    thumbnailUrlFileInput: {
       file: thumbnailUrlInputFile,
       url: fileInputUrl,
     },

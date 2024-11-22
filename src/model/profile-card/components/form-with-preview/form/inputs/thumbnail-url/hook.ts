@@ -5,7 +5,7 @@ import { useProfileCardFormStore } from "../../../store/hook";
 
 export const useProfileCardThumbnailUrlInput = () => {
   const setUploadedUrl = useProfileCardFormStore(
-    (state) => state.setThumbnailUploadedUrl,
+    (state) => state.setThumbnailUrl,
   );
 
   // InputType選択ラジオボタン関係の処理
@@ -27,7 +27,9 @@ export const useProfileCardThumbnailUrlInput = () => {
   };
 
   // FileInput関係の処理
-  const fileInput = useProfileCardFormStore((state) => state.fileInput);
+  const fileInput = useProfileCardFormStore(
+    (state) => state.thumbnailUrlFileInput,
+  );
   const setFile = useProfileCardFormStore(
     (state) => state.setThumbnailUrlFileInput,
   );
@@ -44,7 +46,7 @@ export const useProfileCardThumbnailUrlInput = () => {
 
   // GallerySelect関係の処理
   const galleryItem = useProfileCardFormStore(
-    (state) => state.galleryInput.thumbnailUrlGalleryItem,
+    (state) => state.thumbnailUrlGalleryInput.item,
   );
   const setGalleryItem = useProfileCardFormStore(
     (state) => state.setThumbnailUrlGalleryInput,
