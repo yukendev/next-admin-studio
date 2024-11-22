@@ -1,4 +1,4 @@
-import type { InputType } from "@/common/components/form/file-input-with-gallery-select";
+import type { FileInputWithGalleryInputType } from "@/common/components/form/file-input-with-gallery-select/type";
 import { useCallback } from "react";
 import { match } from "ts-pattern";
 import { useProfileCardFormStore } from "../../../store/hook";
@@ -16,7 +16,7 @@ export const useProfileCardThumbnailUrlInput = () => {
     (state) => state.setThumbnailUrlInputType,
   );
   const handleRadioChange = (inputType: string) => {
-    setInputType(inputType as InputType);
+    setInputType(inputType as FileInputWithGalleryInputType);
     match(inputType)
       .with("upload", () => {
         setUploadedUrl(fileInput.url);

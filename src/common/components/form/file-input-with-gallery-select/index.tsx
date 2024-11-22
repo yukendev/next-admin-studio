@@ -7,13 +7,12 @@ import { isEmpty } from "@/common/lib/guard";
 import { ErrorMessages } from "../error-messages";
 import { FileInput } from "../file-input";
 import { GallerySelect } from "./gallery-select";
+import type { FileInputWithGalleryInputType } from "./type";
 
 const OPTIONS = [
   { value: "select", label: "ギャラリーから選択" },
   { value: "upload", label: "アップロードする" },
 ];
-
-export type InputType = "select" | "upload";
 
 type Props = {
   label?: string;
@@ -24,7 +23,7 @@ type Props = {
   gallerySelectProps: ComponentProps<typeof GallerySelect>;
   fileInputProps?: ComponentProps<typeof FileInput>;
   radioProps: {
-    value: InputType;
+    value: FileInputWithGalleryInputType;
     onChange: (value: string) => void;
   };
 };

@@ -1,0 +1,1 @@
+export const PROFILE_CARD_ADMIN_LABEL_DEFAULT_VALUE = "";
