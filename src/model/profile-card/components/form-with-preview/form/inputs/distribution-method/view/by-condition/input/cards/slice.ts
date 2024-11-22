@@ -1,32 +1,31 @@
+import type { CheckboxGroupValue } from "@/common/components/form/checkbox-group/type";
 import type { TriValueDistributionCondition } from "@/common/components/form/type";
+import type { FormInputSliceCreater } from "@/model/common/types/form-input-slice";
+
+type ProfileDistributionMethodByConditionInputCardsValue = {
+  cardStatus: TriValueDistributionCondition;
+  yesCardIds: CheckboxGroupValue;
+  noCardIds: CheckboxGroupValue;
+};
 
 export type ProfileDistributionMethodByConditionInputCardsSlice = {
   // 「あり」「なし」「絞り込まない」の値を管理
-  cardStatus: TriValueDistributionCondition | null;
-  setCardStatus: (cardStatus: TriValueDistributionCondition) => void;
-
-  // 「あり」の場合のカードIDの配列を管理
-  yesCardIds: string[];
-  setYesCardIds: (cardIds: string[]) => void;
-
-  // 「なし」の場合のカードIDの配列を管理
-  noCardIds: string[];
-  setNoCardIds: (cardIds: string[]) => void;
+  cards: ProfileDistributionMethodByConditionInputCardsValue;
+  setCards: (
+    cards: ProfileDistributionMethodByConditionInputCardsValue,
+  ) => void;
 
   // エラーメッセージを管理
-  errorMessages: string[];
-  setErrorMessages: (errorMessages: string[]) => void;
+  // errorMessages: string[];
+  // setErrorMessages: (errorMessages: string[]) => void;
 };
 
-export const createProfileDistributionMethodByConditionInputCardsSlice = (
-  initialState: ProfileDistributionMethodByConditionInputCardsSlice,
-): ProfileDistributionMethodByConditionInputCardsSlice => ({
-  cardStatus: initialState.cardStatus,
-  setCardStatus: initialState.setCardStatus,
-  yesCardIds: initialState.yesCardIds,
-  setYesCardIds: initialState.setYesCardIds,
-  noCardIds: initialState.noCardIds,
-  setNoCardIds: initialState.setNoCardIds,
-  errorMessages: initialState.errorMessages,
-  setErrorMessages: initialState.setErrorMessages,
+export const createProfileDistributionMethodByConditionInputCardsSlice: FormInputSliceCreater<
+  ProfileDistributionMethodByConditionInputCardsSlice,
+  ProfileDistributionMethodByConditionInputCardsValue
+> = (initialState) => (set, _get) => ({
+  cards: initialState,
+
+  setCards: (cards) => set({ cards }),
+  // setErrorMessages: (errorMessages) => set({ errorMessages }),
 });

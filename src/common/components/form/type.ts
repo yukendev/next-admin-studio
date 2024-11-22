@@ -6,3 +6,5 @@ export type CostomInputProps = {
   errorMessages?: string[] | undefined;
   dataTestId?: string;
 };
+
+export type TriValueDistributionCondition = "ANY" | "YES" | "NO";
