@@ -1,3 +1,8 @@
+import type { DateFieldValue } from "@/common/components/form/date-field/type";
+import type { FileInputWithGalleryValue } from "@/common/components/form/file-input-with-gallery-select/type";
+import type { NumberInputValue } from "@/common/components/form/number-input/type";
+import type { TagsInputValue } from "@/common/components/form/tags-input/type";
+import type { TextInputValue } from "@/common/components/form/text-input/type";
 import type { ValidationSlice } from "@/model/common/store/slice/validation";
 import type { AdminLabelSlice } from "../form/inputs/admin-label/slice";
 import type { BirthdaySlice } from "../form/inputs/birthday/slice";
@@ -8,12 +13,12 @@ import type { ThumbnailUrlSlice } from "../form/inputs/thumbnail-url/slice";
 
 export type ProfileCardForm = {
   id: string;
-  adminLabel: string;
-  birthday: Date | null;
-  luckyNumber: number;
-  name: string;
-  tags: string[];
-  thumbnailUrl: string | null;
+  adminLabel: TextInputValue;
+  birthday: DateFieldValue;
+  luckyNumber: NumberInputValue;
+  name: TextInputValue;
+  tags: TagsInputValue;
+  thumbnailUrl: FileInputWithGalleryValue;
 };
 
 export type ProfileCardFormSlice = {

@@ -1,6 +1,7 @@
 import { getValidationtErrorMessage } from "@/model/common/lib/get-validation-error-message";
 import type { FormInputSliceCreater } from "@/model/common/types/form-input-slice";
 
+import type { ProfileCardForm } from "../../../store/type";
 import { validateProfileCardBirthdayOnSubmit } from "./validation";
 
 export type BirthdaySlice = {
@@ -12,9 +13,9 @@ export type BirthdaySlice = {
 
 export const createBirthdaySlice: FormInputSliceCreater<
   BirthdaySlice,
-  "birthday"
+  Pick<ProfileCardForm, "birthday">
 > = (initialState) => (set, get) => ({
-  birthday: initialState?.birthday ?? null,
+  birthday: initialState.birthday,
   setBirthday: (birthday) => set({ birthday }),
   getBirthdayErrorMessages: () => {
     const birthday = get().birthday;

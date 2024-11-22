@@ -1,6 +1,6 @@
 import { getValidationtErrorMessage } from "@/model/common/lib/get-validation-error-message";
 import type { FormInputSliceCreater } from "@/model/common/types/form-input-slice";
-
+import type { ProfileCardForm } from "../../../store/type";
 import {
   validateProfileCardAdminLabelOnChange,
   validateProfileCardAdminLabelOnSubmit,
@@ -15,9 +15,9 @@ export type AdminLabelSlice = {
 
 export const createAdminLabelSlice: FormInputSliceCreater<
   AdminLabelSlice,
-  "adminLabel"
+  Pick<ProfileCardForm, "adminLabel">
 > = (initialState) => (set, get) => ({
-  adminLabel: initialState?.adminLabel ?? "",
+  adminLabel: initialState.adminLabel,
   setAdminLabel: (adminLabel) => set({ adminLabel }),
   getAdminLabelErrorMessages: () => {
     const value = get().adminLabel;

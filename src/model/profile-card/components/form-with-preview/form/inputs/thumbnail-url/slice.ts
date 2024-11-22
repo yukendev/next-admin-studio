@@ -1,8 +1,12 @@
-import type { InputType } from "@/common/components/form/file-input-with-gallery-select";
 import type { GalleryItem } from "@/common/components/form/file-input-with-gallery-select/gallery-select/type";
 
+import type {
+  FileInputWithGalleryInputType,
+  FileInputWithGalleryValue,
+} from "@/common/components/form/file-input-with-gallery-select/type";
 import { getValidationtErrorMessage } from "@/model/common/lib/get-validation-error-message";
 import type { FormInputSliceCreater } from "@/model/common/types/form-input-slice";
+import type { ProfileCardForm } from "../../../store/type";
 import { getThumbnailUrlValue } from "./lib";
 import {
   validateProfileCardThumbnailUrlOnChange,
@@ -10,23 +14,10 @@ import {
 } from "./validation";
 
 export type ThumbnailUrlSlice = {
-  // アップロードした画像のS3のURL
-  thumbnailUrl: string | null;
-  // サムネイルがギャラリーから選択されているか、アップロードした画像から選択されているか
-  thumbnailUrlInputType: InputType;
-
-  // ギャラリーから選択された画像
-  thumbnailUrlGalleryInput: {
-    item: GalleryItem | null;
-  };
-  // ファイル入力関連のstate
-  thumbnailUrlFileInput: {
-    file: File | null;
-    url: string | null;
-  };
+  thumbnailUrl: FileInputWithGalleryValue;
 
   setThumbnailUrl: (thumbnailUrl: string | null) => void;
-  setThumbnailUrlInputType: (inputType: InputType) => void;
+  setThumbnailUrlInputType: (inputType: FileInputWithGalleryInputType) => void;
   setThumbnailUrlFileInput: (fileInput: {
     file: File | null;
     url: string | null;
@@ -38,28 +29,27 @@ export type ThumbnailUrlSlice = {
 
 export const createThumbnailUrlSlice: FormInputSliceCreater<
   ThumbnailUrlSlice,
-  "thumbnailUrl"
+  Pick<ProfileCardForm, "thumbnailUrl">
 > = (initialState) => (set, get) => {
-  const initialValue = getThumbnailUrlValue(initialState?.thumbnailUrl ?? null);
-
   return {
-    // initialStateを利用して各stateを初期化
-    ...initialValue,
+    thumbnailUrl: initialState.thumbnailUrl,
 
     setThumbnailUrl: (thumbnailUrl) => {
-      set(getThumbnailUrlValue(thumbnailUrl));
+      set({ thumbnailUrl: getThumbnailUrlValue(thumbnailUrl) });
     },
     setThumbnailUrlInputType: (inputType) => {
-      set({ thumbnailUrlInputType: inputType });
+      set({ thumbnailUrl: { ...get().thumbnailUrl, inputType } });
     },
     setThumbnailUrlFileInput: (fileInput) => {
-      set({ thumbnailUrlFileInput: fileInput });
+      set({ thumbnailUrl: { ...get().thumbnailUrl, fileInput } });
     },
     setThumbnailUrlGalleryInput: (galleryItem) => {
       set({
-        thumbnailUrlGalleryInput: {
-          ...get().thumbnailUrlGalleryInput,
-          item: galleryItem,
+        thumbnailUrl: {
+          ...get().thumbnailUrl,
+          galleryInput: {
+            item: galleryItem,
+          },
         },
       });
     },
@@ -69,8 +59,8 @@ export const createThumbnailUrlSlice: FormInputSliceCreater<
       return getValidationtErrorMessage({
         phase: get().validationPhase,
         validations: {
-          onChange: validateProfileCardThumbnailUrlOnChange(value),
-          onConfirmSubmit: validateProfileCardThumbnailUrlOnSubmit(value),
+          onChange: validateProfileCardThumbnailUrlOnChange(value.url),
+          onConfirmSubmit: validateProfileCardThumbnailUrlOnSubmit(value.url),
         },
       });
     },
