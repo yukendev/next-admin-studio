@@ -1,6 +1,11 @@
-import { Text } from "@mantine/core";
+import { Stack } from "@mantine/core";
 import type { FC } from "react";
+import { ProfileDistributionMethodByConditionInputCards } from "./input/cards";
+import { ProfileDistributionMethodIsStuff } from "./input/is-stuff";
 
 export const ProfileDistributionMethodByConditionView: FC = () => (
-  <Text>条件を指定して配布することができます。</Text>
+  <Stack>
+    <ProfileDistributionMethodIsStuff />
+    <ProfileDistributionMethodByConditionInputCards />
+  </Stack>
 );

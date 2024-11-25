@@ -10,7 +10,7 @@ export const useProfileCardThumbnailUrlInput = () => {
 
   // InputType選択ラジオボタン関係の処理
   const inputType = useProfileCardFormStore(
-    (state) => state.thumbnailUrlInputType,
+    (state) => state.thumbnailUrl.inputType,
   );
   const setInputType = useProfileCardFormStore(
     (state) => state.setThumbnailUrlInputType,
@@ -28,7 +28,7 @@ export const useProfileCardThumbnailUrlInput = () => {
 
   // FileInput関係の処理
   const fileInput = useProfileCardFormStore(
-    (state) => state.thumbnailUrlFileInput,
+    (state) => state.thumbnailUrl.fileInput,
   );
   const setFile = useProfileCardFormStore(
     (state) => state.setThumbnailUrlFileInput,
@@ -46,7 +46,7 @@ export const useProfileCardThumbnailUrlInput = () => {
 
   // GallerySelect関係の処理
   const galleryItem = useProfileCardFormStore(
-    (state) => state.thumbnailUrlGalleryInput.item,
+    (state) => state.thumbnailUrl.galleryInput.item,
   );
   const setGalleryItem = useProfileCardFormStore(
     (state) => state.setThumbnailUrlGalleryInput,

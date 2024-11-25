@@ -9,25 +9,30 @@ import { ProfileCardTagsPreviewContainer } from "./tags";
 
 // フォームの値を可視化するためだけのコンポーネント
 const FormValueStringifying = () => {
-  const adminLabel = useProfileCardFormStore((state) => state.adminLabel);
-  const name = useProfileCardFormStore((state) => state.name);
-  const birthday = useProfileCardFormStore((state) => state.birthday);
-  const luckyNumber = useProfileCardFormStore((state) => state.luckyNumber);
-  const tags = useProfileCardFormStore((state) => state.tags);
-  const thumbnailUploadedUrl = useProfileCardFormStore(
-    (state) => state.thumbnailUrl,
-  );
+  const state = useProfileCardFormStore((state) => state);
+  // const name = useProfileCardFormStore((state) => state.name);
+  // const birthday = useProfileCardFormStore((state) => state.birthday);
+  // const luckyNumber = useProfileCardFormStore((state) => state.luckyNumber);
+  // const tags = useProfileCardFormStore((state) => state.tags);
+  // const thumbnailUploadedUrl = useProfileCardFormStore(
+  //   (state) => state.thumbnailUrl,
+  // );
+  // const distributionMethodType = useProfileCardFormStore((state) => ({
+  //   type: state.distributionMethodType,
+  //   byConditionCardStatus: state.profileDistributionMethodByConditionCardStatus,
+  // }));
 
-  const formValue = {
-    adminLabel,
-    name,
-    birthday,
-    luckyNumber,
-    tags,
-    thumbnailUploadedUrl,
-  };
+  // const formValue = {
+  //   adminLabel,
+  //   name,
+  //   birthday,
+  //   luckyNumber,
+  //   tags,
+  //   thumbnailUploadedUrl,
+  // };
 
-  return <div>{JSON.stringify(formValue)}</div>;
+  console.info(JSON.stringify(state));
+  return <div className="fixed w-[700px]">{JSON.stringify(state)}</div>;
 };
 
 export const ProfileCardFormPreview = () => {

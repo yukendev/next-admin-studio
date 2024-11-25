@@ -6,8 +6,10 @@ import type { TextInputValue } from "@/common/components/form/text-input/type";
 import type { ValidationSlice } from "@/model/common/store/slice/validation";
 import type { AdminLabelSlice } from "../form/inputs/admin-label/slice";
 import type { BirthdaySlice } from "../form/inputs/birthday/slice";
-import type { DistributionMethodSlice } from "../form/inputs/distribution-method/slice";
-import type { ProfileDistributionMethodInputValue } from "../form/inputs/distribution-method/type";
+import type {
+  DistributionMethodInputSlice,
+  DistributionMethodSlice,
+} from "../form/inputs/distribution-method/slice";
 import type { LuckyNumberSlice } from "../form/inputs/lucky-number/slice";
 import type { NameSlice } from "../form/inputs/name/slice";
 import type { TagsSlice } from "../form/inputs/tags/slice";
@@ -21,8 +23,7 @@ export type ProfileCardForm = {
   name: TextInputValue;
   tags: TagsInputValue;
   thumbnailUrl: FileInputWithGalleryValue;
-  distributionMethod: ProfileDistributionMethodInputValue;
-};
+} & DistributionMethodInputSlice;
 
 export type ProfileCardFormSlice = {
   id: string;

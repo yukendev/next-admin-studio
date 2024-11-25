@@ -1,29 +1,45 @@
 import type { FormInputSliceCreater } from "@/model/common/types/form-input-slice";
-import type { ProfileCardForm } from "@/model/profile-card/components/form-with-preview/store/type";
 import {
-  type ProfileDistributionMethodByConditionInputCardsSlice,
-  createProfileDistributionMethodByConditionInputCardsSlice,
+  type ProfileDistributionMethodByConditionCardsInputSlice,
+  type ProfileDistributionMethodByConditionCardsSetterSlice,
+  createProfileDistributionMethodByConditionCardsSlice,
 } from "./input/cards/slice";
 import {
-  type ProfileDistributionMethodByConditionInputIsStuffSlice,
-  createProfileDistributionMethodByConditionInputIsStuffSlice,
+  type ProfileDistributionMethodByConditionIsStuffInputSlice,
+  type ProfileDistributionMethodByConditionIsStuffSetterSlice,
+  createProfileDistributionMethodByConditionIsStuffSlice,
 } from "./input/is-stuff/slice";
 
+// 「条件を指定して配布」のフォームで入力される値
 export type ProfileDistributionMethodByConditionInputSlice =
-  ProfileDistributionMethodByConditionInputCardsSlice &
-    ProfileDistributionMethodByConditionInputIsStuffSlice;
+  ProfileDistributionMethodByConditionCardsInputSlice &
+    ProfileDistributionMethodByConditionIsStuffInputSlice;
 
+// 「条件を指定して配布」のフォームで入力される値のsetter
+export type ProfileDistributionMethodByConditionSetterSlice =
+  ProfileDistributionMethodByConditionCardsSetterSlice &
+    ProfileDistributionMethodByConditionIsStuffSetterSlice;
+
+// store全体で管理するプロパティ
+export type ProfileDistributionMethodByConditionSlice =
+  ProfileDistributionMethodByConditionInputSlice &
+    ProfileDistributionMethodByConditionSetterSlice;
+
+// storeを作成する関数
 export const createProfileDistributionMethodByConditionInputSlice: FormInputSliceCreater<
-  ProfileDistributionMethodByConditionInputSlice,
-  Pick<
-    ProfileCardForm,
-    "distributionMethod"
-  >["distributionMethod"]["conditional"]
+  ProfileDistributionMethodByConditionSlice,
+  ProfileDistributionMethodByConditionInputSlice
 > = (initialState) => (set, get, store) => ({
-  ...createProfileDistributionMethodByConditionInputIsStuffSlice(
-    initialState.isStuff,
-  )(set, get, store),
-  ...createProfileDistributionMethodByConditionInputCardsSlice(
-    initialState.cards,
-  )(set, get, store),
+  // 職員選択ラジオボタンのstoreを作成
+  ...createProfileDistributionMethodByConditionIsStuffSlice(initialState)(
+    set,
+    get,
+    store,
+  ),
+  // カード選択のstoreを作成
+  ...createProfileDistributionMethodByConditionCardsSlice(initialState)(
+    set,
+    get,
+    store,
+  ),
 });

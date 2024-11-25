@@ -2,30 +2,60 @@ import type { CheckboxGroupValue } from "@/common/components/form/checkbox-group
 import type { TriValueDistributionCondition } from "@/common/components/form/type";
 import type { FormInputSliceCreater } from "@/model/common/types/form-input-slice";
 
-type ProfileDistributionMethodByConditionInputCardsValue = {
-  cardStatus: TriValueDistributionCondition;
-  yesCardIds: CheckboxGroupValue;
-  noCardIds: CheckboxGroupValue;
+// カード選択のフォームで入力される値
+export type ProfileDistributionMethodByConditionCardsInputSlice = {
+  // 「あり」「なし」「絞り込まない」の値を管理
+  profileDistributionMethodByConditionCardStatus: TriValueDistributionCondition;
+  // 「あり」の場合のカードIDを管理
+  profileDistributionMethodByConditionYesCardIds: CheckboxGroupValue;
+  // 「なし」の場合のカードIDを管理
+  profileDistributionMethodByConditionNoCardIds: CheckboxGroupValue;
 };
 
-export type ProfileDistributionMethodByConditionInputCardsSlice = {
-  // 「あり」「なし」「絞り込まない」の値を管理
-  cards: ProfileDistributionMethodByConditionInputCardsValue;
-  setCards: (
-    cards: ProfileDistributionMethodByConditionInputCardsValue,
+// カード選択のフォームで入力される値を更新するためのsetter
+export type ProfileDistributionMethodByConditionCardsSetterSlice = {
+  setProfileDistributionMethodByConditionCardStatus: (
+    cardStatus: TriValueDistributionCondition,
   ) => void;
 
-  // エラーメッセージを管理
-  // errorMessages: string[];
-  // setErrorMessages: (errorMessages: string[]) => void;
+  setProfileDistributionMethodByConditionYesCardIds: (
+    yesCardIds: CheckboxGroupValue,
+  ) => void;
+
+  setProfileDistributionMethodByConditionNoCardIds: (
+    noCardIds: CheckboxGroupValue,
+  ) => void;
 };
 
-export const createProfileDistributionMethodByConditionInputCardsSlice: FormInputSliceCreater<
-  ProfileDistributionMethodByConditionInputCardsSlice,
-  ProfileDistributionMethodByConditionInputCardsValue
-> = (initialState) => (set, _get) => ({
-  cards: initialState,
+// store全体で管理するプロパティ
+export type ProfileDistributionMethodByConditionCardsSlice =
+  ProfileDistributionMethodByConditionCardsInputSlice &
+    ProfileDistributionMethodByConditionCardsSetterSlice;
 
-  setCards: (cards) => set({ cards }),
-  // setErrorMessages: (errorMessages) => set({ errorMessages }),
+// storeを作成する関数
+export const createProfileDistributionMethodByConditionCardsSlice: FormInputSliceCreater<
+  ProfileDistributionMethodByConditionCardsSlice,
+  ProfileDistributionMethodByConditionCardsInputSlice
+> = (initialState) => (set) => ({
+  // 初期値をセット
+  profileDistributionMethodByConditionCardStatus:
+    initialState.profileDistributionMethodByConditionCardStatus,
+  profileDistributionMethodByConditionYesCardIds:
+    initialState.profileDistributionMethodByConditionYesCardIds,
+  profileDistributionMethodByConditionNoCardIds:
+    initialState.profileDistributionMethodByConditionNoCardIds,
+
+  // setterを定義
+  setProfileDistributionMethodByConditionCardStatus: (status) =>
+    set({
+      profileDistributionMethodByConditionCardStatus: status,
+    }),
+  setProfileDistributionMethodByConditionYesCardIds: (yesCardIds) =>
+    set({
+      profileDistributionMethodByConditionYesCardIds: yesCardIds,
+    }),
+  setProfileDistributionMethodByConditionNoCardIds: (noCardIds) =>
+    set({
+      profileDistributionMethodByConditionNoCardIds: noCardIds,
+    }),
 });

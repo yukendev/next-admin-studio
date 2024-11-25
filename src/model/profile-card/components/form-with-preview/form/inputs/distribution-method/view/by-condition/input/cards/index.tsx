@@ -11,7 +11,7 @@ import {
 import { useProfileDistributionMethodByConditionInputCards } from "./hook";
 
 export const ProfileDistributionMethodByConditionInputCards: FC = () => {
-  const { checkBoxProps, radioButtonProps, errorMessages } =
+  const { checkBoxProps, radioButtonProps } =
     useProfileDistributionMethodByConditionInputCards();
   return (
     <Stack>
@@ -33,7 +33,6 @@ export const ProfileDistributionMethodByConditionInputCards: FC = () => {
             <CheckboxGroup
               options={PROFILE_DISTRIBUTION_METHOD_BY_CONDITION_CARD_OPTIONS}
               {...checkBoxProps.yes}
-              errorMessages={errorMessages}
               isVertical
             />
           </Stack>
@@ -48,7 +47,6 @@ export const ProfileDistributionMethodByConditionInputCards: FC = () => {
             <CheckboxGroup
               options={PROFILE_DISTRIBUTION_METHOD_BY_CONDITION_CARD_OPTIONS}
               {...checkBoxProps.no}
-              errorMessages={errorMessages}
               isVertical
             />
           </Stack>
